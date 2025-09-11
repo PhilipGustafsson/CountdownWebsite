@@ -2,40 +2,60 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Countdown to December 1st</title>
+  <title>Countdown...</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: #111;
-      color: #fff;
+      margin: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      flex-direction: column;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background-color: green;
+      background-size: cover;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
     }
+
     h1 {
-      font-size: 2em;
+      font-size: 3em;
+      margin-bottom: 20px;
     }
+
     #countdown {
       font-size: 2.5em;
-      margin-top: 20px;
+      padding: 20px 40px;
+      border-radius: 15px;
+    }
+
+    /* ❄️ Snow effect */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1.5em;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
   </style>
 </head>
 <body>
-  <h1>Countdown to December 1st 🎄</h1>
+  <h1>Countdown...</h1>
   <div id="countdown"></div>
 
   <script>
     function updateCountdown() {
       const now = new Date();
       let year = now.getFullYear();
-      let target = new Date(year, 11, 1); // December = month 11 (0-indexed)
+      let target = new Date(year, 11, 1); // December 1st
 
-      // If December 1st has passed this year, go to next year
       if (now > target) {
         target = new Date(year + 1, 11, 1);
       }
@@ -52,7 +72,21 @@
     }
 
     setInterval(updateCountdown, 1000);
-    updateCountdown(); // run once immediately
+    updateCountdown();
+
+    // ❄️ Generate snowflakes
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '🥸';
+      snowflake.style.left = Math.random() * window.innerWidth + 'px';
+      snowflake.style.animationDuration = (5 + Math.random() * 5) + 's';
+      snowflake.style.fontSize = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(snowflake);
+
+      setTimeout(() => { snowflake.remove(); }, 10000);
+    }
+    setInterval(createSnowflake, 200);
   </script>
 </body>
 </html>
