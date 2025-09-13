@@ -29,8 +29,8 @@
       border-radius: 15px;
     }
 
-    /* ❄️ Snow effect */
-    .snowflake {
+    /* Animation effect */
+    .emojiAnimation {
       position: fixed;
       top: -10px;
       color: white;
@@ -73,20 +73,29 @@
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
+	
+	function createEmojiAnimation() {
+	  const emojiAnimation = document.createElement('div');
+	  emojiAnimation.classList.add('emojiAnimation');
 
-    // ❄️ Generate snowflakes
-    function createSnowflake() {
-      const snowflake = document.createElement('div');
-      snowflake.classList.add('snowflake');
-      snowflake.textContent = '🥸';
-      snowflake.style.left = Math.random() * window.innerWidth + 'px';
-      snowflake.style.animationDuration = (5 + Math.random() * 5) + 's';
-      snowflake.style.fontSize = (10 + Math.random() * 20) + 'px';
-      document.body.appendChild(snowflake);
+	  const random = Math.random();
+	  if (random < 0.2) {
+		const festiveEmojis = ["🍬", "🎁", "⭐"];
+		emojiAnimation.textContent = festiveEmojis[Math.floor(Math.random() * festiveEmojis.length)];
+	  } else {
+		emojiAnimation.textContent = "🥸";
+	  }
 
-      setTimeout(() => { snowflake.remove(); }, 10000);
-    }
-    setInterval(createSnowflake, 200);
+	  emojiAnimation.style.left = Math.random() * window.innerWidth + 'px';
+	  emojiAnimation.style.animationDuration = (5 + Math.random() * 5) + 's';
+	  emojiAnimation.style.fontSize = (10 + Math.random() * 20) + 'px';
+	  document.body.appendChild(emojiAnimation);
+
+	  setTimeout(() => { emojiAnimation.remove(); }, 10000);
+	}
+
+	setInterval(createEmojiAnimation, 200);
+
   </script>
 </body>
 </html>
